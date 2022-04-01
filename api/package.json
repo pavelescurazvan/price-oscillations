@@ -1,0 +1,30 @@
+{
+  "name": "price-oscillations",
+  "version": "0.0.1",
+  "description": "Price Oscillations",
+  "scripts": {
+    "start": "node ./dist/tsc/main.js",
+    "build": "../node_modules/.bin/tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/express": "^4.17.13",
+    "@types/mocha": "^9.1.0",
+    "@types/needle": "^2.5.3",
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "esbuild": "^0.11.11",
+    "eslint": "^7.22.0",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.35",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.2",
+    "chai": "^4.3.6",
+    "express": "^4.17.3",
+    "mocha": "^9.2.2"
+  }
+}
