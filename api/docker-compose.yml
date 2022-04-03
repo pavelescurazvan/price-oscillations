@@ -25,7 +25,7 @@ services:
     environment:
       - FLYWAY_URL=jdbc:postgresql://db:5432/tickers
       - FLYWAY_LOCATIONS=filesystem:/flyway/sql
-      - FLYWAY_SCHEMAS=something
+      - FLYWAY_SCHEMAS=tickers
       - FLYWAY_TABLE=schema_version
       - FLYWAY_USER=postgres
       - FLYWAY_PASSWORD=postgres
