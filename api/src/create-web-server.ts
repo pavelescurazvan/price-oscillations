@@ -8,7 +8,7 @@ import {createGetCurrencyPairTickerRequestHandler} from "./controller";
 import {Transaction} from "./domain";
 import {errorHandler} from "./middlewars/error-handler";
 import {asyncWrapper} from "./middlewars/async-wrapper";
-import {getConnectionPool} from "./db";
+import {getConnectionPool} from "./db-utils";
 
 
 /**
