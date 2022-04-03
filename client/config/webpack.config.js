@@ -121,7 +121,7 @@ module.exports = function (webpackEnv) {
         options: cssOptions,
       },
       {
-        // Options.tsx for PostCSS as we reference these options twice
+        // Options for PostCSS as we reference these options twice
         // Adds vendor prefixing based on your specified browser support in
         // package.json
         loader: require.resolve('postcss-loader'),
@@ -621,7 +621,7 @@ module.exports = function (webpackEnv) {
       isEnvDevelopment && new CaseSensitivePathsPlugin(),
       isEnvProduction &&
         new MiniCssExtractPlugin({
-          // Options.tsx similar to the same options in webpackOptions.output
+          // Options similar to the same options in webpackOptions.output
           // both options are optional
           filename: 'static/css/[name].[contenthash:8].css',
           chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
