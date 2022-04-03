@@ -12,8 +12,12 @@ export const createGetCurrencyPairTickerRequestHandler = ({ getPriceHistory }: {
 
   return async (req, res) => {
     const currencyPair = req.params.pair;
+    const periodInMS = Number(req.params.period);
 
-    const records = await getPriceHistory({currencyPair, numberOfDays: config.numberOfDays});
+    const records = await getPriceHistory({
+      periodInMS,
+      currencyPair,
+      numberOfDays: config.numberOfDays});
 
     res.send(records);
   }

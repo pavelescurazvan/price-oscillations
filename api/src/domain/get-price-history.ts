@@ -2,27 +2,22 @@ import {GetPriceHistory, Repository} from "../domain";
 import axios from "axios";
 import {config} from "../config";
 
-// @ts-ignore
-const FIVE_MINUTES_IN_MS = 300000;
-const FIVE_SECONDS_IN_MS = 5000;
 
 /**
  * Get price history
  */
-export const createGetPriceHistory = (repository: Repository): GetPriceHistory => async ({currencyPair, numberOfDays}: {
+export const createGetPriceHistory = (repository: Repository): GetPriceHistory => async ({currencyPair, numberOfDays, periodInMS}: {
   currencyPair: string,
-  numberOfDays: number
+  numberOfDays: number,
+  periodInMS: number
 }) => {
   const lastPrice = await repository.getLastPrice(currencyPair);
 
-  if (isPriceOld(lastPrice)) {
-    console.log("price is old");
+  if (isPriceOld(periodInMS, lastPrice)) {
     await refreshCurrencyPairPrice({repository, currencyPair});
-  } else {
-    console.log("price is not old");
   }
 
-  return await repository.getPriceHistory({currencyPair, numberOfDays});
+  return await repository.getPriceHistory({currencyPair, numberOfDays, periodInMS});
 }
 
 /**
@@ -43,9 +38,10 @@ const refreshCurrencyPairPrice = async ({repository, currencyPair} : {
 
 /**
  * Figures if the price is old or not
+ * @param periodInMS
  * @param lastPrice
  */
-const isPriceOld = (lastPrice: {
+const isPriceOld = (periodInMS: number, lastPrice: {
   amount: string,
   currency_pair: string,
   date: Date
@@ -56,5 +52,5 @@ const isPriceOld = (lastPrice: {
 
   const timeDiff = currentDate.getTime() - lastPrice.date.getTime();
 
-  return (timeDiff > FIVE_SECONDS_IN_MS);
+  return (timeDiff > periodInMS);
 }

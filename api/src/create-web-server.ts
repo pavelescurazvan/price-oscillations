@@ -48,7 +48,7 @@ export const createWebServer = () => {
 
   router.get('/currencies',   asyncWrapper(listCurrenciesRequestHandler));
   router.get('/currency-tickers:currency', asyncWrapper(listCurrencyTickersRequestHandler));
-  router.get('/currency-pair-ticker/:pair', asyncWrapper(getCurrencyPairTickerRequestHandler));
+  router.get('/currency-pair-ticker/:pair/:period', asyncWrapper(getCurrencyPairTickerRequestHandler));
 
   let server: Server;
   return {
