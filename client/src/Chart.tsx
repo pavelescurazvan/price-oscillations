@@ -270,7 +270,7 @@ function Chart() {
       >
         <CartesianGrid vertical={false} />
         <XAxis dataKey="date" label="Date" />
-        <YAxis domain={['auto', 'auto']} label="Stock Price" />
+        <YAxis domain={['auto', 'auto']} label="Price" />
         <Tooltip
           wrapperStyle={{
             borderColor: 'white',
