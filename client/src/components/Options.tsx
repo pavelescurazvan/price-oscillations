@@ -4,13 +4,13 @@ type OptionsProps = {
   example: string;
 };
 
-type OptionsTate = {
+type OptionsState = {
   priceThresholdMarker: number;
   currencyPair: string;
   fetchIntervalInMinutes: number;
 };
 
-export default class Options extends React.Component<OptionsProps, OptionsTate> {
+export default class Options extends React.Component<OptionsProps, OptionsState> {
   constructor(props: OptionsProps) {
     super(props)
 
