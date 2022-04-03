@@ -5,7 +5,7 @@ import {DependencyOne} from "../domain";
  * Creates the transaction request handler
  * @param repository
  */
-export const createSampleRequestHandler = ({ dependencyOne }: {
+export const createGetCurrencyPairTickerRequestHandler = ({ dependencyOne }: {
   dependencyOne: DependencyOne
 }): RequestHandler  => {
 

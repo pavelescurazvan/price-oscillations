@@ -1,7 +1,10 @@
-import express from "express";
+import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Server} from "http";
-import {createSampleRequestHandler} from "./controller";
+import {createListCurrenciesRequestHandler} from "./controller";
+import {createListCurrencyTickersRequestHandler} from "./controller";
+import {createGetCurrencyPairTickerRequestHandler} from "./controller";
+
 
 /**
  * Creates the web server.
@@ -20,13 +23,21 @@ export const createWebServer = () => {
 
 
   // Request handlers
-  const transactionRequestHandler = createSampleRequestHandler({
+  const listCurrenciesRequestHandler = createListCurrenciesRequestHandler({
     dependencyOne,
   });
 
-  router.get('/currencies', transactionRequestHandler);
-  router.get('/tickers/:currency', transactionRequestHandler);
-  router.get('/ticker/:currencyPair', transactionRequestHandler);
+  const listCurrencyTickersRequestHandler = createListCurrencyTickersRequestHandler({
+    dependencyOne,
+  });
+
+  const getCurrencyPairTickerRequestHandler = createGetCurrencyPairTickerRequestHandler({
+    dependencyOne,
+  });
+
+  router.get('/currencies', listCurrenciesRequestHandler);
+  router.get('/currency-tickers/:currency', listCurrencyTickersRequestHandler);
+  router.get('/currency-pair-ticker', getCurrencyPairTickerRequestHandler);
 
   let server: Server;
   return {
