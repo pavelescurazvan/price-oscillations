@@ -262,12 +262,10 @@ const data03 = [
 function Chart() {
   return (
     <div className="line-chart-wrapper">
-      <p>BTC / USD price - rate updated every 5 seconds </p>
-
       <Options message={"test 123"}/>
 
       <LineChart
-        width={600} height={400} data={data03}
+        width={1024} height={400} data={data03}
         margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
       >
         <CartesianGrid vertical={false} />

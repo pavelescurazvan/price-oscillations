@@ -1,49 +1,75 @@
 import React from 'react';
 
-type MyProps = {
+type OptionsProps = {
   // using `interface` is also ok
   message: string;
 };
-type MyState = {
-  value: string; // like this
+
+type OptionsTate = {
+  priceThresholdMarker: number;
+  currencyPair: string;
+  fetchIntervalInMinutes: number;
 };
 
-export default class Options extends React.Component<MyProps, MyState> {
-  state: MyState = {
-    value: ""
+export default class Options extends React.Component<OptionsProps, OptionsTate> {
+  constructor(props: OptionsProps) {
+    super(props)
+
+    this.state = {
+      priceThresholdMarker: 1000,
+      currencyPair: 'USD/BTC',
+      fetchIntervalInMinutes: 5
+    };
+
+    this.handlePriceThresholdMarkerChange = this.handlePriceThresholdMarkerChange.bind(this);
+    this.handleCurrencyPairChange = this.handleCurrencyPairChange.bind(this);
+    this.handleFetchIntervalChange = this.handleFetchIntervalChange.bind(this);
   }
 
-  constructor(props: MyProps) {
-    super(props);
-    this.state = {value: 'coconut'};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  handlePriceThresholdMarkerChange(event: React.FormEvent<HTMLInputElement>) {
+    this.setState({priceThresholdMarker: Number(event.currentTarget.value)});
   }
 
-  handleChange(event: React.FormEvent<HTMLSelectElement>) {
-    this.setState({value: event.currentTarget.value});
+  handleCurrencyPairChange(event: React.FormEvent<HTMLSelectElement>) {
+    console.log("event.currentTarget.value", event.currentTarget.value);
+
+    this.setState({currencyPair: event.currentTarget.value});
   }
 
-  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    alert('Your favorite flavor is: ' + this.state.value);
-    event.preventDefault();
-  }
+  handleFetchIntervalChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    this.setState({ fetchIntervalInMinutes: Number(event.currentTarget.value) });
+  };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <p>{this.state.currencyPair} price - rate updated every {this.state.fetchIntervalInMinutes} minutes </p>
+
+        <form>
+          <label>
+            Price Threshold Marker:
+            <input type="text" value={this.state.priceThresholdMarker} onChange={this.handlePriceThresholdMarkerChange}/>
+          </label>
+
+          <label>
+            Currency Pair:
+            <select value={this.state.currencyPair} onChange={this.handleCurrencyPairChange}>
+              <option value="USD/BTC">USD/BTC</option>
+              <option value="USD/ETH">USD/ETH</option>
+              <option value="USD/EGLD">USD/EGLD</option>
+            </select>
+          </label>
+
+          <label>
+            Fetch Internval:
+            <select value={this.state.fetchIntervalInMinutes} onChange={this.handleFetchIntervalChange}>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </form>
+      </div>
     );
   }
 }
