@@ -5,6 +5,6 @@ export interface TransactionRecord extends Transaction {
 }
 
 export interface Repository {
-  putTransaction: (transaction: Transaction) => Promise<void>,
-  getLastTransaction: (clientId: number, calendarMonth: string) => Promise<TransactionRecord>,
+  addPrice: (transaction: Transaction) => Promise<void>,
+  getPriceHistory: (clientId: number, calendarMonth: string) => Promise<TransactionRecord>,
 }

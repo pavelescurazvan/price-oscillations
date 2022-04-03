@@ -1,19 +1,17 @@
 import {Repository} from "./repository";
 
-export type Transaction = {
-  date: string,
+export type Price = {
+  currency_pair: string,
+  date: Date,
+  price: string,
 }
 
-export type Result = {
-  data: number,
-}
+export type AddPrice = ({ price }: {
+  price: Price,
+}) => Promise<void>
 
-export type DependencyOne = ({ transaction }: {
-  transaction: Transaction,
-}) => Promise<Result>
-
-export type CreateDependencyOne = ({ repository }: {
+export type CreateAddPrice = ({ repository }: {
   repository: Repository
 }) => {
-  dependencyOne: DependencyOne
+  addPrice: AddPrice
 }
