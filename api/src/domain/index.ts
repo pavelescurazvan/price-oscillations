@@ -1,2 +1,2 @@
-export {Repository, TransactionRecord} from "./repository";
-export {Transaction, CreateDependencyOne, DependencyOne} from "./types";
+export {Repository} from "./repository";
+export {CreateAddPrice, CreateGetPriceHistory} from "./types";
