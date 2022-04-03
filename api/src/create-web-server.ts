@@ -24,7 +24,9 @@ export const createWebServer = () => {
     dependencyOne,
   });
 
-  router.post('/transaction', transactionRequestHandler);
+  router.get('/currencies', transactionRequestHandler);
+  router.get('/tickers/:currency', transactionRequestHandler);
+  router.get('/ticker/:currencyPair', transactionRequestHandler);
 
   let server: Server;
   return {

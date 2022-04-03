@@ -1,13 +1,19 @@
 import axios from "axios";
 
+const API_URL = 'http://localhost:8080'
+
 export const ticker = {
-  getCurrencies: () => {
+  getCurrencies: async () => {
     return axios.get('https://api.uphold.com/v0/assets');
   },
-  getTickersForCurrency: (currency: string) => {
+  getTickersForCurrency: async (currency: string) => {
     return axios.get(`https://api.uphold.com/v0/ticker/${currency}`);
   },
-  getTickersForCurrencyPair: (currencyPair: string) => {
-    return axios.get(`https://api.uphold.com/v0/ticker/${currencyPair}`);
+  getTickersForCurrencyPair: async (currencyPair: string) => {
+    const response = await axios.get(`https://api.uphold.com/v0/ticker/${currencyPair}`);
+
+    console.log("response", response);
+
+    return [];
   }
 }
