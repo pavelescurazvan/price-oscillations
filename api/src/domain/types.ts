@@ -7,17 +7,22 @@ export type Price = {
 }
 
 export type AddPrice = (price: Price) => Promise<void>
+export type GetLastPrice = (currencyPair: string) => Promise<{
+  amount: string,
+  currency_pair: string,
+  date: Date
+}>
+
+export type GetPriceHistory = ({currencyPair, numberOfDays}: {
+  currencyPair: string,
+  numberOfDays: number
+}) => Promise<Price[]>
 
 export type CreateAddPrice = ({ repository }: {
   repository: Repository
 }) => {
   addPrice: AddPrice
 }
-
-export type GetPriceHistory = ({currencyPair, numberOfDays}: {
-  currencyPair: string,
-  numberOfDays: number
-}) => Promise<Price[]>
 
 export type CreateGetPriceHistory = ({ repository }: {
   repository: Repository

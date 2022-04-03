@@ -9,7 +9,7 @@ import {errorHandler} from "./middlewars/error-handler";
 import {asyncWrapper} from "./middlewars/async-wrapper";
 import {getConnectionPool} from "./db-utils";
 import {createPostgresRepository} from "./repositories/postgres-repository";
-import {createAddPrice, createGetPriceHistory} from "./domain";
+import {createGetPriceHistory} from "./domain";
 
 
 /**
@@ -37,14 +37,12 @@ export const createWebServer = () => {
   const repository = createPostgresRepository(pool);
 
   // Domain
-  const addPrice = createAddPrice(repository);
   const getPriceHistory = createGetPriceHistory(repository);
 
   // Request handlers
   const listCurrenciesRequestHandler = createListCurrenciesRequestHandler();
   const listCurrencyTickersRequestHandler = createListCurrencyTickersRequestHandler();
   const getCurrencyPairTickerRequestHandler = createGetCurrencyPairTickerRequestHandler({
-    addPrice,
     getPriceHistory
   });
 

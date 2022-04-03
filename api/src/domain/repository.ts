@@ -1,7 +1,8 @@
-import {AddPrice, GetPriceHistory} from "./types";
+import {AddPrice, GetLastPrice, GetPriceHistory} from "./types";
 
 
 export interface Repository {
   addPrice: AddPrice,
   getPriceHistory: GetPriceHistory,
+  getLastPrice: GetLastPrice,
 }
