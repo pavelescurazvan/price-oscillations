@@ -21,7 +21,7 @@ export const createGetCurrencyPairTickerRequestHandler = ({ addPrice, getPriceHi
 
     await addPrice({amount, currencyPair});
 
-    const records = await getPriceHistory(10);
+    const records = await getPriceHistory({currencyPair, numberOfDays: config.numberOfDays});
 
     res.send(records);
   }

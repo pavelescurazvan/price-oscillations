@@ -13,8 +13,12 @@ export const createPostgresRepository = (pool: Pool): Repository => {
       await query(pool, "INSERT INTO tickers.entries(amount, currency_pair) VALUES($1, $2)", [amount, currencyPair])
     },
 
-    getPriceHistory: async (_days) => {
-      const {rows} = await query(pool, "SELECT *  FROM tickers.entries") as {
+    getPriceHistory: async ({currencyPair, numberOfDays}) => {
+      const {rows} = await query(pool,
+        `SELECT *  FROM tickers.entries
+        WHERE currency_pair = '${currencyPair}'
+        AND date > (CURRENT_DATE - INTERVAL '${numberOfDays} days')`
+      ) as {
         rows: Price[];
       };
 

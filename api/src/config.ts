@@ -15,5 +15,6 @@ export const config = {
   dbPassword: rawEnv.DB_PASSWORD ?? 'postgres',
   dbPort: rawEnv.DB_PORT ? Number(rawEnv.DB_PORT) : 5432,
 
-  upholdAPIURL: 'https://api.uphold.com/v0'
+  upholdAPIURL: 'https://api.uphold.com/v0',
+  numberOfDays: 10
 };
