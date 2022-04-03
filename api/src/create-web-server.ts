@@ -6,6 +6,8 @@ import {createListCurrenciesRequestHandler} from "./controller";
 import {createListCurrencyTickersRequestHandler} from "./controller";
 import {createGetCurrencyPairTickerRequestHandler} from "./controller";
 import {Transaction} from "./domain";
+import {errorHandler} from "./middlewars/error-handler";
+import {asyncWrapper} from "./middlewars/async-wrapper";
 
 
 /**
@@ -25,6 +27,7 @@ export const createWebServer = () => {
 
   app.use("/", router);
 
+  app.use(errorHandler);
 
   const {dependencyOne} = {
     dependencyOne: ({ transaction }: {
@@ -51,9 +54,10 @@ export const createWebServer = () => {
     dependencyOne,
   });
 
-  router.get('/currencies', listCurrenciesRequestHandler);
-  router.get('/currency-tickers:currency', listCurrencyTickersRequestHandler);
-  router.get('/currency-pair-ticker/:pair', getCurrencyPairTickerRequestHandler);
+
+  router.get('/currencies',   asyncWrapper(listCurrenciesRequestHandler));
+  router.get('/currency-tickers:currency', asyncWrapper(listCurrencyTickersRequestHandler));
+  router.get('/currency-pair-ticker/:pair', asyncWrapper(getCurrencyPairTickerRequestHandler));
 
   let server: Server;
   return {
