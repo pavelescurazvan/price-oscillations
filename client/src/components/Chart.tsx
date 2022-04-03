@@ -269,6 +269,7 @@ type TickerRecord = {
   price: number
 };
 
+// TODO: Use redux ton manage state
 type ChartState = {
   priceThresholdMarker: number;
   currencyPair: string;
