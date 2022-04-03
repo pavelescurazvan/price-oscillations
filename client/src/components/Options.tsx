@@ -7,7 +7,7 @@ type OptionsProps = {
 type OptionsState = {
   priceThresholdMarker: number;
   currencyPair: string;
-  fetchIntervalInMinutes: number;
+  fetchIntervalInMilliseconds: number;
 };
 
 export default class Options extends React.Component<OptionsProps, OptionsState> {
@@ -17,7 +17,7 @@ export default class Options extends React.Component<OptionsProps, OptionsState>
     this.state = {
       priceThresholdMarker: 1000,
       currencyPair: 'USD/BTC',
-      fetchIntervalInMinutes: 5
+      fetchIntervalInMilliseconds: 60000
     };
 
     this.handlePriceThresholdMarkerChange = this.handlePriceThresholdMarkerChange.bind(this);
@@ -34,13 +34,13 @@ export default class Options extends React.Component<OptionsProps, OptionsState>
   }
 
   handleFetchIntervalChange = (event: React.FormEvent<HTMLSelectElement>) => {
-    this.setState({ fetchIntervalInMinutes: Number(event.currentTarget.value) });
+    this.setState({ fetchIntervalInMilliseconds: Number(event.currentTarget.value) });
   };
 
   render() {
     return (
       <div>
-        <p>{this.state.currencyPair} price - rate updated every {this.state.fetchIntervalInMinutes} minutes </p>
+        <p>{this.state.currencyPair} price - rate updated every {this.state.fetchIntervalInMilliseconds / 60 / 1000} minute</p>
 
         <form>
           <label>
@@ -58,11 +58,12 @@ export default class Options extends React.Component<OptionsProps, OptionsState>
           </label>
 
           <label>
-            Fetch Internval:
-            <select value={this.state.fetchIntervalInMinutes} onChange={this.handleFetchIntervalChange}>
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
+            Fetch Interval:
+            <select value={this.state.fetchIntervalInMilliseconds} onChange={this.handleFetchIntervalChange}>
+              <option value="60000">1 minute</option>
+              <option value="300000">5 minutes</option>
+              <option value="600000">10 minutes</option>
+              <option value="900000">15 minutes</option>
             </select>
           </label>
         </form>
