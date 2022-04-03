@@ -7,7 +7,6 @@ import {config} from "../config";
  * Creates the transaction request handler
  * @param repository
  */
-// @ts-ignore
 export const createGetCurrencyPairTickerRequestHandler = ({ addPrice, getPriceHistory }: {
   addPrice: AddPrice,
   getPriceHistory: GetPriceHistory
@@ -16,11 +15,14 @@ export const createGetCurrencyPairTickerRequestHandler = ({ addPrice, getPriceHi
   return async (req, res) => {
     const currencyPair = req.params.pair;
 
+
     const response = await axios.get(`${config.upholdAPIURL}/ticker/${currencyPair}`);
-    const {ask: price} = response.data;
+    const {ask: amount} = response.data;
 
-    const record = {price, date: new Date().toUTCString(), currencyPair};
+    await addPrice({amount, currencyPair});
 
-    res.send([record]);
+    const records = await getPriceHistory(10);
+
+    res.send(records);
   }
 }

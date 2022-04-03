@@ -3,7 +3,7 @@ import {Repository} from "./repository";
 
 export type Price = {
   currencyPair: string,
-  price: string,
+  amount: string,
 }
 
 export type AddPrice = (price: Price) => Promise<void>
