@@ -319,12 +319,12 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
             contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
             labelStyle={{ fontWeight: 'bold', color: '#666666' }}
           />
-          <Line dataKey="price" stroke="#ff7300" dot={false} />
+          <Line dataKey="amount" stroke="#ff7300" dot={false} />
           <Brush dataKey="date" startIndex={this.state.data.length - 40}>
             <AreaChart>
               <CartesianGrid />
               <YAxis hide domain={['auto', 'auto']} />
-              <Area dataKey="price" stroke="#ff7300" fill="#ff7300" dot={false} />
+              <Area dataKey="amount" stroke="#ff7300" fill="#ff7300" dot={false} />
             </AreaChart>
           </Brush>
         </LineChart>
