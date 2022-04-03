@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  # Database
+  db:
+    container_name: api-db
+    image: postgres:11.1-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tickers
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tickers -U postgres"]
+      interval: 10s
+      timeout: 1s
+      retries: 5
+    command: postgres -c 'shared_buffers=256MB' -c 'max_connections=600' -c 'log_min_duration_statement=200'
+    ports:
+      - "5432:5432"
+
+  # Database Migration
+  db-migrate:
+    container_name: api-db-migration
+    depends_on:
+      app-db:
+        condition: service_healthy
+    build:
+      context: ./db/
+    environment:
+      - FLYWAY_URL=jdbc:postgresql://db:5432/tickers
+      - FLYWAY_LOCATIONS=filesystem:/flyway/sql
+      - FLYWAY_SCHEMAS=tickers
+      - FLYWAY_TABLE=schema_version
+      - FLYWAY_USER=postgres
+      - FLYWAY_PASSWORD=postgres
+    command: migrate

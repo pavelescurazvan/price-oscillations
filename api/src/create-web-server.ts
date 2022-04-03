@@ -8,6 +8,7 @@ import {createGetCurrencyPairTickerRequestHandler} from "./controller";
 import {Transaction} from "./domain";
 import {errorHandler} from "./middlewars/error-handler";
 import {asyncWrapper} from "./middlewars/async-wrapper";
+import {getConnectionPool} from "./db";
 
 
 /**
@@ -28,6 +29,10 @@ export const createWebServer = () => {
   app.use("/", router);
 
   app.use(errorHandler);
+
+  // Initialise database.
+  // @ts-ignore
+  const pool = getConnectionPool();
 
   const {dependencyOne} = {
     dependencyOne: ({ transaction }: {
