@@ -1,8 +1,7 @@
 import React from 'react';
 
 type OptionsProps = {
-  // using `interface` is also ok
-  message: string;
+  example: string;
 };
 
 type OptionsTate = {
@@ -31,8 +30,6 @@ export default class Options extends React.Component<OptionsProps, OptionsTate> 
   }
 
   handleCurrencyPairChange(event: React.FormEvent<HTMLSelectElement>) {
-    console.log("event.currentTarget.value", event.currentTarget.value);
-
     this.setState({currencyPair: event.currentTarget.value});
   }
 

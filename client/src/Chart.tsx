@@ -262,7 +262,7 @@ const data03 = [
 function Chart() {
   return (
     <div className="line-chart-wrapper">
-      <Options message={"test 123"}/>
+      <Options example={"test 123"}/>
 
       <LineChart
         width={1024} height={400} data={data03}
