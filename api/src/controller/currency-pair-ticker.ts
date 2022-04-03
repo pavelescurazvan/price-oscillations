@@ -18,6 +18,8 @@ export const createGetCurrencyPairTickerRequestHandler = ({ dependencyOne }: {
     const response = await axios.get(`${config.upholdAPIURL}/ticker/${currencyPair}`);
     const {ask: price} = response.data;
 
-    res.send({price, date: new Date().toUTCString(), currencyPair});
+    const record = {price, date: new Date().toUTCString(), currencyPair};
+
+    res.send([record]);
   }
 }

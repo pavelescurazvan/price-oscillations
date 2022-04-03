@@ -292,11 +292,11 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
   }
 
   async componentDidMount() {
-    const response = await ticker.getTickersForCurrencyPair(this.state.currencyPair)
+    const data = await ticker.getTickersForCurrencyPair(this.state.currencyPair)
 
-    console.log("response", response);
+    console.log("componentDidMount data", data);
 
-    this.setState({ data: []})
+    this.setState({ data})
   }
 
   render() {

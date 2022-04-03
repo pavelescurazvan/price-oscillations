@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:8080/'
+const API_URL = 'http://localhost:8080'
 
 export const ticker = {
   getCurrencies: async () => {
@@ -12,8 +12,6 @@ export const ticker = {
   getTickersForCurrencyPair: async (currencyPair: string) => {
     const response = await axios.get(`${API_URL}/currency-pair-ticker/${currencyPair}`);
 
-    console.log("response", response);
-
-    return [];
+    return response.data;
   }
 }
