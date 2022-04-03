@@ -1,20 +1,11 @@
 import {RequestHandler} from "express";
-import {DependencyOne} from "../domain";
 
 /**
  * Creates the transaction request handler
- * @param repository
  */
-export const createListCurrenciesRequestHandler = ({ dependencyOne }: {
-  dependencyOne: DependencyOne
-}): RequestHandler  => {
+export const createListCurrenciesRequestHandler = (): RequestHandler  => {
 
-  return async (req, res) => {
-    const {data} = req.body;
-
-    console.log(dependencyOne);
-    console.log(data);
-
+  return async (_req, res) => {
     res.send({});
   }
 

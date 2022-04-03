@@ -1,2 +1,2 @@
 export {Repository} from "./repository";
-export {CreateAddPrice, CreateGetPriceHistory} from "./types";
+export {CreateAddPrice, CreateGetPriceHistory, AddPrice, GetPriceHistory} from "./types";

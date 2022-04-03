@@ -1,5 +1,4 @@
 import {Pool, QueryResult} from 'pg';
-import {acquireConnection} from './acquire-connection';
 
 /**
  * Runs a query.
@@ -8,7 +7,7 @@ import {acquireConnection} from './acquire-connection';
  * @param bindings
  */
 export async function query<Row = any>(pool: Pool, sql: string, bindings: unknown[] = []): Promise<QueryResult<Row>> {
-	const connection = await acquireConnection(pool);
+	const connection = await pool.connect();
 	try {
 		return await connection.query<Row>(sql, bindings);
 	} finally {

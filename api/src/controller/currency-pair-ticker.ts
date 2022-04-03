@@ -1,5 +1,5 @@
 import {RequestHandler} from "express";
-import {DependencyOne} from "../domain";
+import {AddPrice, GetPriceHistory} from "../domain";
 import axios from "axios";
 import {config} from "../config";
 
@@ -8,8 +8,9 @@ import {config} from "../config";
  * @param repository
  */
 // @ts-ignore
-export const createGetCurrencyPairTickerRequestHandler = ({ dependencyOne }: {
-  dependencyOne: DependencyOne
+export const createGetCurrencyPairTickerRequestHandler = ({ addPrice, getPriceHistory }: {
+  addPrice: AddPrice,
+  getPriceHistory: GetPriceHistory
 }): RequestHandler  => {
 
   return async (req, res) => {

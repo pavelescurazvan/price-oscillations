@@ -5,10 +5,10 @@ import {Server} from "http";
 import {createListCurrenciesRequestHandler} from "./controller";
 import {createListCurrencyTickersRequestHandler} from "./controller";
 import {createGetCurrencyPairTickerRequestHandler} from "./controller";
-import {Transaction} from "./domain";
 import {errorHandler} from "./middlewars/error-handler";
 import {asyncWrapper} from "./middlewars/async-wrapper";
 import {getConnectionPool} from "./db-utils";
+import {createPostgresRepository} from "./repositories/postgres-repository";
 
 
 /**
@@ -31,34 +31,19 @@ export const createWebServer = () => {
   app.use(errorHandler);
 
   // Initialise database.
-  // @ts-ignore
   const pool = getConnectionPool();
 
-  const {dependencyOne} = {
-    dependencyOne: ({ transaction }: {
-      transaction: Transaction,
-    }) => {
-      console.log(transaction);
-
-      return Promise.resolve({
-        data: 1,
-      })
-    }
-  };
+  const {addPrice, getPriceHistory} = createPostgresRepository(pool);
 
   // Request handlers
-  const listCurrenciesRequestHandler = createListCurrenciesRequestHandler({
-    dependencyOne,
-  });
+  const listCurrenciesRequestHandler = createListCurrenciesRequestHandler();
 
-  const listCurrencyTickersRequestHandler = createListCurrencyTickersRequestHandler({
-    dependencyOne,
-  });
+  const listCurrencyTickersRequestHandler = createListCurrencyTickersRequestHandler();
 
   const getCurrencyPairTickerRequestHandler = createGetCurrencyPairTickerRequestHandler({
-    dependencyOne,
+    addPrice,
+    getPriceHistory
   });
-
 
   router.get('/currencies',   asyncWrapper(listCurrenciesRequestHandler));
   router.get('/currency-tickers:currency', asyncWrapper(listCurrencyTickersRequestHandler));
