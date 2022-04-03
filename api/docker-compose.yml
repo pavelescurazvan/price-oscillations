@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # Category Tree Consumer - Database
   db:
     image: postgres:latest
     container_name: db
@@ -17,7 +16,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Category Tree Consumer - Database Migration
   db-migration:
     container_name: db-migration
     build:
