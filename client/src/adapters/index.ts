@@ -1,10 +1,13 @@
-import Axios from "axios";
+import axios from "axios";
 
-const returnAxiosInstance = () => {
-  return Axios.create();
-}
-
-export const get = (url: string) => {
-  const axios = returnAxiosInstance();
-  return axios.get(url);
+export const ticker = {
+  getCurrencies: () => {
+    return axios.get('https://api.uphold.com/v0/assets');
+  },
+  getTickersForCurrency: (currency: string) => {
+    return axios.get(`https://api.uphold.com/v0/ticker/${currency}`);
+  },
+  getTickersForCurrencyPair: (currencyPair: string) => {
+    return axios.get(`https://api.uphold.com/v0/ticker/${currencyPair}`);
+  }
 }

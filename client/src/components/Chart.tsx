@@ -263,16 +263,29 @@ type ChartProps = {
   example: string;
 };
 
+
+type TickerRecord = {
+  date: string,
+  price: number
+};
+
 type ChartState = {
   priceThresholdMarker: number;
   currencyPair: string;
   fetchIntervalInMinutes: number;
+  data: TickerRecord[]
 };
 
 export default class Chart extends React.Component<ChartProps, ChartState> {
   constructor(props: ChartProps) {
     super(props)
 
+    this.state = {
+      priceThresholdMarker: 1000,
+      currencyPair: 'USD/BTC',
+      fetchIntervalInMinutes: 5,
+      data: data03
+    };
   }
 
   render() {
