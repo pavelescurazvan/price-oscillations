@@ -12,6 +12,8 @@ export const createListCurrencyTickersRequestHandler = ({ dependencyOne }: {
   return async (req, res) => {
     const {data} = req.body;
 
+    console.log(dependencyOne);
+    console.log(data);
 
     res.send({});
   }

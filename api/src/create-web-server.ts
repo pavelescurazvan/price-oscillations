@@ -1,9 +1,10 @@
-import * as express from "express";
+import express from "express";
 import * as bodyParser from "body-parser";
 import {Server} from "http";
 import {createListCurrenciesRequestHandler} from "./controller";
 import {createListCurrencyTickersRequestHandler} from "./controller";
 import {createGetCurrencyPairTickerRequestHandler} from "./controller";
+import {Transaction} from "./domain";
 
 
 /**
@@ -22,6 +23,18 @@ export const createWebServer = () => {
   app.use("/", router);
 
 
+  const {dependencyOne} = {
+    dependencyOne: ({ transaction }: {
+      transaction: Transaction,
+    }) => {
+      console.log(transaction);
+
+      return Promise.resolve({
+        data: 1,
+      })
+    }
+  };
+
   // Request handlers
   const listCurrenciesRequestHandler = createListCurrenciesRequestHandler({
     dependencyOne,
@@ -36,8 +49,8 @@ export const createWebServer = () => {
   });
 
   router.get('/currencies', listCurrenciesRequestHandler);
-  router.get('/currency-tickers/:currency', listCurrencyTickersRequestHandler);
-  router.get('/currency-pair-ticker', getCurrencyPairTickerRequestHandler);
+  router.get('/currency-tickers:currency', listCurrencyTickersRequestHandler);
+  router.get('/currency-pair-ticker/:pair', getCurrencyPairTickerRequestHandler);
 
   let server: Server;
   return {

@@ -4,7 +4,7 @@
   "description": "Price Oscillations",
   "scripts": {
     "start": "node ./dist/tsc/main.js",
-    "build": "../node_modules/.bin/tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
