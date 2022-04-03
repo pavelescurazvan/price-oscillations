@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush, AreaChart, Area } from 'recharts';
 
 import Options from './Options';
-import './App.css';
+import './Chart.css';
 
 const data03 = [
   { date: 'Jan 04 2016', price: 105.35 },
