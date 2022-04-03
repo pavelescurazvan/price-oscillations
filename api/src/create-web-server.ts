@@ -36,14 +36,13 @@ export const createWebServer = () => {
 
   const repository = createPostgresRepository(pool);
 
+  // Domain
   const addPrice = createAddPrice(repository);
   const getPriceHistory = createGetPriceHistory(repository);
 
   // Request handlers
   const listCurrenciesRequestHandler = createListCurrenciesRequestHandler();
-
   const listCurrencyTickersRequestHandler = createListCurrencyTickersRequestHandler();
-
   const getCurrencyPairTickerRequestHandler = createGetCurrencyPairTickerRequestHandler({
     addPrice,
     getPriceHistory
