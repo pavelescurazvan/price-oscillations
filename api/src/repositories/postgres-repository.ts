@@ -10,7 +10,7 @@ import {Price} from "../domain/types";
 export const createPostgresRepository = (pool: Pool): Repository => {
   return {
     addPrice: async ({amount, currencyPair}) => {
-      await query(pool, "INSERT INTO tickers.entries(amount, currency_pair)", [amount, currencyPair])
+      await query(pool, "INSERT INTO tickers.entries(amount, currency_pair) VALUES($1, $2)", [amount, currencyPair])
     },
 
     getPriceHistory: async (_days) => {

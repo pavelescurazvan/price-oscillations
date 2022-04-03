@@ -10,10 +10,10 @@ export const config = {
   port,
 
   dbHost: rawEnv.DB_HOST ?? 'localhost',
-  dbName: rawEnv.DB_NAME ?? 'category_tree_consumer',
+  dbName: rawEnv.DB_NAME ?? 'tickers',
   dbUser: rawEnv.DB_USER ?? 'postgres',
   dbPassword: rawEnv.DB_PASSWORD ?? 'postgres',
-  dbPort: rawEnv.DB_PORT ? Number(rawEnv.DB_PORT) : 2345,
+  dbPort: rawEnv.DB_PORT ? Number(rawEnv.DB_PORT) : 5432,
 
   upholdAPIURL: 'https://api.uphold.com/v0'
 };
