@@ -17,6 +17,8 @@
     "@types/mocha": "^9.1.0",
     "@types/needle": "^2.5.3",
     "@types/node": "^15.0.1",
+    "@types/pg": "^8.6.5",
+    "@types/sinon": "^10.0.11",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
     "esbuild": "^0.11.11",
@@ -30,7 +32,10 @@
     "body-parser": "^1.19.2",
     "chai": "^4.3.6",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mocha": "^9.2.2"
+    "mocha": "^9.2.2",
+    "pg": "^8.7.3",
+    "sinon": "^13.0.1"
   }
 }
