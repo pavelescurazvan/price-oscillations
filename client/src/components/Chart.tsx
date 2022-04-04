@@ -28,7 +28,7 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
     this.state = {
       priceThresholdMarker: 1000,
       currencyPair: 'USD-BTC',
-      fetchIntervalInMilliseconds: 5000,
+      fetchIntervalInMilliseconds: 60000,
       data: []
     };
 
@@ -43,21 +43,27 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
 
   handleCurrencyPairChange(event: React.FormEvent<HTMLSelectElement>) {
     this.setState({currencyPair: event.currentTarget.value});
+
+    this.refreshData(event.currentTarget.value, this.state.fetchIntervalInMilliseconds);
   }
 
-  handleFetchIntervalChange = (event: React.FormEvent<HTMLSelectElement>) => {
+  handleFetchIntervalChange = async (event: React.FormEvent<HTMLSelectElement>) => {
     this.setState({fetchIntervalInMilliseconds: Number(event.currentTarget.value)});
+
+    this.refreshData(this.state.currencyPair, Number(event.currentTarget.value));
   };
 
-  async componentDidMount() {
+  refreshData = async (currencyPair: string, fetchIntervalInMilliseconds: number) => {
     const data = await ticker.getTickersForCurrencyPair({
-      currencyPair: this.state.currencyPair,
-      fetchIntervalInMilliseconds: this.state.fetchIntervalInMilliseconds
+      currencyPair,
+      fetchIntervalInMilliseconds
     });
 
-    console.log("componentDidMount data", data);
+    this.setState({data});
+  }
 
-    this.setState({ data})
+  componentDidMount = async () => {
+    await this.refreshData(this.state.currencyPair, this.state.fetchIntervalInMilliseconds);
   }
 
   render() {
@@ -90,7 +96,7 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
             labelStyle={{ fontWeight: 'bold', color: '#666666' }}
           />
           <Line dataKey="amount" stroke="#ff7300" dot={false} />
-          <Brush dataKey="date" startIndex={this.state.data.length - 40}>
+          <Brush dataKey="date" startIndex={this.state.data.length - 4}>
             <AreaChart>
               <CartesianGrid />
               <YAxis hide domain={['auto', 'auto']} />
