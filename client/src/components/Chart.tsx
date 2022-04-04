@@ -85,8 +85,8 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
           margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
         >
           <CartesianGrid vertical={false} />
-          <XAxis dataKey="date" label="Date" />
-          <YAxis domain={['auto', 'auto']} label="Price" />
+          <XAxis dataKey="date" label="" />
+          <YAxis domain={['auto', 'auto']} label="" />
           <Tooltip
             wrapperStyle={{
               borderColor: 'white',
