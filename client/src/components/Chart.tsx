@@ -18,7 +18,7 @@ type TickerRecord = {
 type ChartState = {
   priceThresholdMarker: number;
   currencyPair: string;
-  fetchIntervalInMinutes: number;
+  fetchIntervalInMilliseconds: number;
   data: TickerRecord[]
 };
 
@@ -29,14 +29,32 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
     this.state = {
       priceThresholdMarker: 1000,
       currencyPair: 'USD-BTC',
-      fetchIntervalInMinutes: 5,
+      fetchIntervalInMilliseconds: 5000,
       data: []
     };
 
+    this.handlePriceThresholdMarkerChange = this.handlePriceThresholdMarkerChange.bind(this);
+    this.handleCurrencyPairChange = this.handleCurrencyPairChange.bind(this);
+    this.handleFetchIntervalChange = this.handleFetchIntervalChange.bind(this);
   }
 
+  handlePriceThresholdMarkerChange(event: React.FormEvent<HTMLInputElement>) {
+    this.setState({priceThresholdMarker: Number(event.currentTarget.value)});
+  }
+
+  handleCurrencyPairChange(event: React.FormEvent<HTMLSelectElement>) {
+    this.setState({currencyPair: event.currentTarget.value});
+  }
+
+  handleFetchIntervalChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    this.setState({fetchIntervalInMilliseconds: Number(event.currentTarget.value)});
+  };
+
   async componentDidMount() {
-    const data = await ticker.getTickersForCurrencyPair(this.state.currencyPair)
+    const data = await ticker.getTickersForCurrencyPair({
+      currencyPair: this.state.currencyPair,
+      fetchIntervalInMilliseconds: this.state.fetchIntervalInMilliseconds
+    });
 
     console.log("componentDidMount data", data);
 
@@ -46,7 +64,16 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
   render() {
     return (
       <div className="line-chart-wrapper">
-        <Options example={"test 123"}/>
+        <p>{this.state.currencyPair} price - rate updated every {this.state.fetchIntervalInMilliseconds / 60 / 1000} minute</p>
+
+        <Options
+          priceThresholdMarker={this.state.priceThresholdMarker}
+          currencyPair={this.state.currencyPair}
+          fetchIntervalInMilliseconds={this.state.fetchIntervalInMilliseconds}
+          onPriceChange={this.handlePriceThresholdMarkerChange}
+          onCurrencyPairChange={this.handleCurrencyPairChange}
+          onFetchIntervalChange={this.handleFetchIntervalChange}
+        />
 
         <LineChart
           width={1024} height={400} data={this.state.data}

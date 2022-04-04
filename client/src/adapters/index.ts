@@ -9,8 +9,11 @@ export const ticker = {
   getTickersForCurrency: async (currency: string) => {
     return axios.get(`${API_URL}/currency-tickers/${currency}`);
   },
-  getTickersForCurrencyPair: async (currencyPair: string) => {
-    const response = await axios.get(`${API_URL}/currency-pair-ticker/${currencyPair}`);
+  getTickersForCurrencyPair: async ({currencyPair, fetchIntervalInMilliseconds}: {
+    currencyPair: string,
+    fetchIntervalInMilliseconds: number
+  }) => {
+    const response = await axios.get(`${API_URL}/currency-pair-ticker/${currencyPair}/${fetchIntervalInMilliseconds}`);
 
     return response.data;
   }
