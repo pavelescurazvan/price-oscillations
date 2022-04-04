@@ -34,7 +34,9 @@ export default class Options extends React.Component<OptionsProps, OptionsState>
             Currency Pair:
             <select value={this.props.currencyPair} onChange={this.props.onCurrencyPairChange}>
               <option value="USD-BTC">USD-BTC</option>
+              <option value="BTC-USD">BTC-USD</option>
               <option value="USD-ETH">USD-ETH</option>
+              <option value="ETH-USD">ETH-USD</option>
             </select>
           </label>
 

@@ -28,7 +28,7 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
 
     this.state = {
       priceThresholdMarker: 1000,
-      currencyPair: 'USD-BTC',
+      currencyPair: 'BTC-USD',
       fetchIntervalInMilliseconds: 60000,
       data: []
     };
