@@ -41,6 +41,8 @@ export default class Options extends React.Component<OptionsProps, OptionsState>
           <label>
             Fetch Interval:
             <select value={this.props.fetchIntervalInMilliseconds} onChange={this.props.onFetchIntervalChange}>
+              <option value="5000">5 seconds</option>
+              <option value="10000">10 seconds</option>
               <option value="60000">1 minute</option>
               <option value="300000">5 minutes</option>
               <option value="600000">10 minutes</option>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush, AreaChart, Area } from 'recharts';
 
 import Options from './Options';
@@ -6,18 +6,19 @@ import './Chart.css';
 import {ticker} from '../adapters';
 
 type ChartProps = {
-  example: string;
+  example: string
 };
 
 type TickerRecord = {
-  date: string,
+  date: string
   price: number
 };
 
 type ChartState = {
-  priceThresholdMarker: number;
-  currencyPair: string;
-  fetchIntervalInMilliseconds: number;
+  priceThresholdMarker: number
+  currencyPair: string
+  fetchIntervalInMilliseconds: number
+  intervalId?: NodeJS.Timer
   data: TickerRecord[]
 };
 
@@ -50,8 +51,20 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
   handleFetchIntervalChange = async (event: React.FormEvent<HTMLSelectElement>) => {
     this.setState({fetchIntervalInMilliseconds: Number(event.currentTarget.value)});
 
-    this.refreshData(this.state.currencyPair, Number(event.currentTarget.value));
+    this.configureRefreshInterval(Number(event.currentTarget.value));
   };
+
+  configureRefreshInterval = (fetchIntervalInMilliseconds: number) => {
+    if (this.state.intervalId) {
+      clearInterval(this.state.intervalId);
+    }
+
+    const intervalId = setInterval(() => {
+      this.refreshData(this.state.currencyPair, fetchIntervalInMilliseconds);
+    }, fetchIntervalInMilliseconds);
+
+    this.setState({intervalId});
+  }
 
   refreshData = async (currencyPair: string, fetchIntervalInMilliseconds: number) => {
     const data = await ticker.getTickersForCurrencyPair({
@@ -64,6 +77,8 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
 
   componentDidMount = async () => {
     await this.refreshData(this.state.currencyPair, this.state.fetchIntervalInMilliseconds);
+
+    this.configureRefreshInterval(this.state.fetchIntervalInMilliseconds);
   }
 
   render() {
