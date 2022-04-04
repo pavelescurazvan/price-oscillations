@@ -117,7 +117,7 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
 
           <ReferenceLine y={this.state.priceThresholdMarker} label="Price Threshold" stroke="red" strokeDasharray="3 3" />
 
-          <Brush dataKey="date" startIndex={this.state.data.length - 10}>
+          <Brush dataKey="date" startIndex={this.state.data.length - 20}>
             <AreaChart>
               <CartesianGrid />
               <YAxis hide domain={['auto', 'auto']} />
