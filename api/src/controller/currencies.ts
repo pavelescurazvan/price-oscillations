@@ -5,6 +5,7 @@ import {RequestHandler} from "express";
  */
 export const createListCurrenciesRequestHandler = (): RequestHandler  => {
 
+  // TODO
   return async (_req, res) => {
     res.send({});
   }

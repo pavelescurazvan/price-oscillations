@@ -10,6 +10,7 @@ import {asyncWrapper} from "./middlewars/async-wrapper";
 import {getConnectionPool} from "./db-utils";
 import {createPostgresRepository} from "./repositories/postgres-repository";
 import {createGetPriceHistory} from "./domain";
+import {fetchCurrencyPairPriceService} from "./services";
 
 
 /**
@@ -37,7 +38,7 @@ export const createWebServer = () => {
   const repository = createPostgresRepository(pool);
 
   // Domain
-  const getPriceHistory = createGetPriceHistory(repository);
+  const getPriceHistory = createGetPriceHistory({repository, fetchCurrencyPairPriceService});
 
   // Request handlers
   const listCurrenciesRequestHandler = createListCurrenciesRequestHandler();

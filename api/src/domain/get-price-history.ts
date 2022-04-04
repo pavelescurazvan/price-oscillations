@@ -1,19 +1,21 @@
 import {GetPriceHistory, Repository} from "../domain";
-import axios from "axios";
-import {config} from "../config";
+import {FetchCurrencyPairPriceService} from "../services";
 
 
 /**
- * Get price history
+ * Create get price history
  */
-export const createGetPriceHistory = (repository: Repository): GetPriceHistory => async ({currencyPair, periodInMS}: {
+export const createGetPriceHistory = ({repository, fetchCurrencyPairPriceService}: {
+  repository: Repository,
+  fetchCurrencyPairPriceService: FetchCurrencyPairPriceService
+}): GetPriceHistory => async ({currencyPair, periodInMS}: {
   currencyPair: string,
   periodInMS: number
 }) => {
   const lastPrice = await repository.getLastPrice(currencyPair);
 
   if (isPriceOld(periodInMS, lastPrice)) {
-    await refreshCurrencyPairPrice({repository, currencyPair});
+    await refreshCurrencyPairPrice({repository, fetchCurrencyPairPriceService, currencyPair});
   }
 
   return await repository.getPriceHistory({currencyPair, periodInMS});
@@ -23,14 +25,15 @@ export const createGetPriceHistory = (repository: Repository): GetPriceHistory =
  * Fetches the updated currency pair price
  * Updates the price in the repository
  * @param repository
+ * @param fetchCurrencyPairPrice
  * @param currencyPair
  */
-const refreshCurrencyPairPrice = async ({repository, currencyPair} : {
+const refreshCurrencyPairPrice = async ({repository, fetchCurrencyPairPriceService, currencyPair} : {
   repository: Repository,
+  fetchCurrencyPairPriceService: FetchCurrencyPairPriceService
   currencyPair: string
 }) => {
-  const response = await axios.get(`${config.upholdAPIURL}/ticker/${currencyPair}`);
-  const {ask: amount} = response.data;
+ const {amount} = await fetchCurrencyPairPriceService(currencyPair);
 
   await repository.addPrice({amount, currencyPair});
 }
