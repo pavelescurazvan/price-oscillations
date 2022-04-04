@@ -35,7 +35,7 @@ export const createPostgresRepository = (pool: Pool): Repository => {
         `SELECT *  FROM tickers.entries
         WHERE currency_pair = '${currencyPair}'
         ORDER BY ID DESC
-        LIMIT 1000`
+        LIMIT 1000` // Hard limit for retrieving data points from DB
       ) as {
         rows: Price[];
       };
