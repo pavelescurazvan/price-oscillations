@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush, AreaChart, Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush, AreaChart, Area, ReferenceLine } from 'recharts';
 
 import Options from './Options';
 import './Chart.css';
@@ -101,6 +101,7 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
           width={1024} height={400} data={this.state.data}
           margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
         >
+
           <CartesianGrid vertical={false} />
           <XAxis dataKey="date" label="" />
           <YAxis domain={['auto', 'auto']} label="" />
@@ -113,6 +114,9 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
             labelStyle={{ fontWeight: 'bold', color: '#666666' }}
           />
           <Line dataKey="amount" stroke="#ff7300" dot={false} />
+
+          <ReferenceLine y={this.state.priceThresholdMarker} label="Price Threshold" stroke="red" strokeDasharray="3 3" />
+
           <Brush dataKey="date" startIndex={this.state.data.length - 10}>
             <AreaChart>
               <CartesianGrid />
