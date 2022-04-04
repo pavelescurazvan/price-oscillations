@@ -19,21 +19,6 @@ export default class Options extends React.Component<OptionsProps, OptionsState>
   constructor(props: OptionsProps) {
     super(props)
 
-    this.handleOnPriceChange = this.handleOnPriceChange.bind(this);
-    this.handleOnCurrencyPairChange = this.handleOnCurrencyPairChange.bind(this);
-    this.handleOnFetchIntervalChange = this.handleOnFetchIntervalChange.bind(this);
-  }
-
-  handleOnPriceChange(e: React.FormEvent<HTMLInputElement>) {
-    this.props.onPriceChange(e);
-  }
-
-  handleOnCurrencyPairChange(e: React.FormEvent<HTMLSelectElement>) {
-    this.props.onCurrencyPairChange(e);
-  }
-
-  handleOnFetchIntervalChange(e: React.FormEvent<HTMLSelectElement>) {
-    this.props.onFetchIntervalChange(e);
   }
 
   render() {
