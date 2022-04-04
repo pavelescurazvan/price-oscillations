@@ -9,16 +9,9 @@ type OptionsProps = {
   onFetchIntervalChange: (event: React.FormEvent<HTMLSelectElement>) => void;
 };
 
-type OptionsState = {
-  priceThresholdMarker: number;
-  currencyPair: string;
-  fetchIntervalInMilliseconds: number;
-};
-
-export default class Options extends React.Component<OptionsProps, OptionsState> {
+export default class Options extends React.Component<OptionsProps> {
   constructor(props: OptionsProps) {
     super(props)
-
   }
 
   render() {

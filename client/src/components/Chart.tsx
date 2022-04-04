@@ -10,8 +10,8 @@ type ChartProps = {
 };
 
 type TickerRecord = {
-  date: string
-  price: number
+  date: Date
+  amount: number
 };
 
 type ChartState = {
