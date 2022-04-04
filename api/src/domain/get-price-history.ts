@@ -6,9 +6,8 @@ import {config} from "../config";
 /**
  * Get price history
  */
-export const createGetPriceHistory = (repository: Repository): GetPriceHistory => async ({currencyPair, numberOfDays, periodInMS}: {
+export const createGetPriceHistory = (repository: Repository): GetPriceHistory => async ({currencyPair, periodInMS}: {
   currencyPair: string,
-  numberOfDays: number,
   periodInMS: number
 }) => {
   const lastPrice = await repository.getLastPrice(currencyPair);
@@ -17,7 +16,7 @@ export const createGetPriceHistory = (repository: Repository): GetPriceHistory =
     await refreshCurrencyPairPrice({repository, currencyPair});
   }
 
-  return await repository.getPriceHistory({currencyPair, numberOfDays, periodInMS});
+  return await repository.getPriceHistory({currencyPair, periodInMS});
 }
 
 /**

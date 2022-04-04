@@ -72,6 +72,8 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
       fetchIntervalInMilliseconds
     });
 
+    console.log('data refreshed', data);
+
     this.setState({data});
   }
 
@@ -111,7 +113,7 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
             labelStyle={{ fontWeight: 'bold', color: '#666666' }}
           />
           <Line dataKey="amount" stroke="#ff7300" dot={false} />
-          <Brush dataKey="date" startIndex={this.state.data.length - 4}>
+          <Brush dataKey="date" startIndex={this.state.data.length - 10}>
             <AreaChart>
               <CartesianGrid />
               <YAxis hide domain={['auto', 'auto']} />

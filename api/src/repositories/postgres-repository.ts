@@ -30,11 +30,12 @@ export const createPostgresRepository = (pool: Pool): Repository => {
       return rows[0];
     },
 
-    getPriceHistory: async ({currencyPair, numberOfDays}) => {
+    getPriceHistory: async ({currencyPair}) => {
       const {rows} = await query(pool,
         `SELECT *  FROM tickers.entries
         WHERE currency_pair = '${currencyPair}'
-        AND date > (CURRENT_DATE - INTERVAL '${numberOfDays} days')`
+        ORDER BY ID DESC
+        LIMIT 1000`
       ) as {
         rows: Price[];
       };

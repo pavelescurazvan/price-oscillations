@@ -1,6 +1,5 @@
 import {RequestHandler} from "express";
 import {GetPriceHistory} from "../domain";
-import {config} from "../config";
 
 /**
  * Creates the transaction request handler
@@ -16,8 +15,8 @@ export const createGetCurrencyPairTickerRequestHandler = ({ getPriceHistory }: {
 
     const records = await getPriceHistory({
       periodInMS,
-      currencyPair,
-      numberOfDays: config.numberOfDays});
+      currencyPair
+    });
 
     res.send(records);
   }
