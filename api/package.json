@@ -4,9 +4,6 @@
   "description": "Price Oscillations",
   "scripts": {
     "start": "node ./dist/tsc/main.js",
-    "db:create": "docker-compose up -d --force-recreate --renew-anon-volumes --no-deps --build db",
-    "db:migrate": "docker-compose up --force-recreate --build db-migration",
-    "db:start": "npm run db:create && npm run db:migrate",
     "build": "tsc -p tsconfig.json"
   },
   "devDependencies": {
