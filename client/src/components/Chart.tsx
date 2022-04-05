@@ -5,9 +5,7 @@ import Options from './Options';
 import './Chart.css';
 import {ticker} from '../adapters';
 
-type ChartProps = {
-  example: string
-};
+type ChartProps = {};
 
 type TickerRecord = {
   date: Date

@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Chart example={"test 123"}/>
+      <Chart/>
     </div>
   );
 }
