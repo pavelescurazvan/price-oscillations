@@ -35,4 +35,4 @@ COPY --from=server-build /usr/local/api/node_modules/ node_modules/
 COPY --from=server-build /usr/local/api/dist ./
 
 ENV PORT 8080
-ENTRYPOINT ["node", "./index.js"]
+ENTRYPOINT ["node", "./main.js"]
