@@ -4,4 +4,9 @@
 - Docker (https://www.docker.com/get-started/)
 
 ## How to start
-`$ ./start.sh`
+
+Run in terminal: `$ ./start.sh`
+
+Client runs on: `http://localhost:3030`
+
+API runs on: `http://localhost:8080`
