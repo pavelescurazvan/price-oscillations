@@ -27,3 +27,16 @@ services:
       - "PGDATABASE=tickers"
     depends_on:
       - db
+
+  api:
+    container_name: api
+    build:
+      context: ./api
+    environment:
+      - DB_HOST=postgres-db
+      - DB_NAME=tickers
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+    ports:
+      - "8080:8080"
