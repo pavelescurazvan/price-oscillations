@@ -8,3 +8,6 @@ docker-compose up --force-recreate --build db-migration
 
 # Start the API
 docker-compose up -d --force-recreate --build api
+
+# Start the Client
+docker-compose up -d --force-recreate --build client

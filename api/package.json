@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Price Oscillations",
   "scripts": {
-    "start": "node ./dist/tsc/main.js",
+    "start": "node ./dist/main.js",
     "build": "tsc -p tsconfig.json"
   },
   "devDependencies": {
