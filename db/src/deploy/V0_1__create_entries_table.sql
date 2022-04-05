@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS tickers;
+CREATE SCHEMA tickers;
 
 CREATE TABLE tickers.entries (
   id BIGSERIAL PRIMARY KEY,

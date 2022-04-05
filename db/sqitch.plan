@@ -1,0 +1,5 @@
+%syntax-version=1.0.0
+%project=tickers
+%uri=https://github.com/pavelescurazvan/price-oscillations
+
+V0_1__create_entries_table 2022-04-05T19:00:00Z razvan <razvan.pavelescu> # Add entries table.

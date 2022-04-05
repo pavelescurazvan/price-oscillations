@@ -1,3 +1,7 @@
-FROM flyway/flyway:7.0-alpine
+FROM sqitch/sqitch
 
-COPY migration /flyway/sql
+COPY ./src ./src
+COPY ./sqitch.conf ./
+COPY ./sqitch.plan ./
+
+ENTRYPOINT sqitch plan && sqitch deploy
